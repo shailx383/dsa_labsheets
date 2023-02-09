@@ -78,20 +78,24 @@ int lstSize(Node* head){
     return size;                
 }
 
-Node *reverseList(Node *head){
-    Node *current = head, *prev = NULL, *temp = NULL;
-    while(current != NULL){
-        temp = current->next;
-        current->next = prev;
-        prev = current;
-        current = temp;
+Node* rearrangeList(Node *head){
+    Node *odd = head, *even = head->next, *firstEven = head->next;
+    while(odd->next != NULL){
+        even = odd->next;
+        odd->next = even->next;
+        if (even->next == NULL) break;
+        even->next = even->next->next;
+        odd = odd->next;
     }
-    return prev;
+    odd->next = firstEven;
+    return head;
 }
 
 int main(){
     Node *head = readList();
-    head = reverseList(head);
-    printList(head);
+    Node *newList = rearrangeList(head);
+    printList(newList);
     freeList(head);
+    freeList(newList);
+
 }
