@@ -1,5 +1,3 @@
-// Find Median
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -83,8 +81,8 @@ void freeList(Node *head)
         cur = nxt;
     }
 }
-// Function definition goes here
 
+// Function definition goes here
 int listSize(Node *head)
 {
     int size = 0;
@@ -97,43 +95,37 @@ int listSize(Node *head)
     return size;
 }
 
-int findMedian(Node *head)
-{
-    int median;
-    int index = 1;
-    int n = listSize(head);
-    Node* current = head;
+int getNodeData(Node *head, int pos){
+    Node *current = head;
+    int index = 0;
+    int data;
     while (current != NULL){
-        if (n % 2 == 0){
-            if (index == n/2){
-                median = (current->data + current->next->data)/2;
-                break;
-            }
-            else{
-                current = current->next;
-                index++;
-            }
+        if (index == pos){
+            data = current->data;
+            break;
         }
-        else{
-            if (index == (n+1)/2){
-                median = current->data;
-                break;
-            }
-            else{
-                current = current->next;
-                index++;
-            }
-        }
+        current = current->next;
+        index++;
     }
+    return data;
 }
-        
 
-int main(void)
-{
-    // Function calls go here
+int isPalindrome(Node *head){
+    Node *current = head;
+    int index = 0;
+    int n = listSize(head), count = 0;
+    for (int i = 0; i < n; i++){
+        if (head->data == getNodeData(current, n - i - 1)) count++;
+        else return 0;
+        head = head->next;
+    }
+    return (count == n);
+}
+
+int main(){
     Node *head = readList();
-    int median = findMedian(head);
-    printf("%d\n", median);
+    int palin = isPalindrome(head);
+    printf("%d\n", palin);
     freeList(head);
     return 0;
 }

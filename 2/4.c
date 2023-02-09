@@ -1,4 +1,3 @@
-// Find Median
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -97,43 +96,22 @@ int listSize(Node *head)
     return size;
 }
 
-int findMedian(Node *head)
-{
-    int median;
-    int index = 1;
-    int n = listSize(head);
-    Node* current = head;
+Node *reverseList(Node *head){
+    Node *current = head;
+    Node *prev = NULL;
+    Node* temp;
     while (current != NULL){
-        if (n % 2 == 0){
-            if (index == n/2){
-                median = (current->data + current->next->data)/2;
-                break;
-            }
-            else{
-                current = current->next;
-                index++;
-            }
-        }
-        else{
-            if (index == (n+1)/2){
-                median = current->data;
-                break;
-            }
-            else{
-                current = current->next;
-                index++;
-            }
-        }
+        temp = current->next;
+        current->next  = prev;
+        prev = current;
+        current = temp;
     }
+    return prev;
 }
-        
 
-int main(void)
-{
-    // Function calls go here
+int main(){
     Node *head = readList();
-    int median = findMedian(head);
-    printf("%d\n", median);
+    head = reverseList(head);
+    printList(head);
     freeList(head);
-    return 0;
 }

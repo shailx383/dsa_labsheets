@@ -1,5 +1,3 @@
-// Find Median
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -83,8 +81,8 @@ void freeList(Node *head)
         cur = nxt;
     }
 }
-// Function definition goes here
 
+// Function definition goes here
 int listSize(Node *head)
 {
     int size = 0;
@@ -97,43 +95,32 @@ int listSize(Node *head)
     return size;
 }
 
-int findMedian(Node *head)
-{
-    int median;
-    int index = 1;
+Node* removeSlide(Node *head, int k){
     int n = listSize(head);
-    Node* current = head;
-    while (current != NULL){
-        if (n % 2 == 0){
-            if (index == n/2){
-                median = (current->data + current->next->data)/2;
-                break;
-            }
-            else{
-                current = current->next;
-                index++;
-            }
+    int index = 0, pos = n - k;
+    Node *current = head, *prev = NULL;
+    while (current != NULL)
+    {
+        if (index == pos)
+        {
+            prev->next = current->next;
+            free(current);
+            break;
         }
-        else{
-            if (index == (n+1)/2){
-                median = current->data;
-                break;
-            }
-            else{
-                current = current->next;
-                index++;
-            }
-        }
+        prev = current;
+        current = current->next;
+        index++;
     }
+    return head;
 }
-        
 
-int main(void)
-{
-    // Function calls go here
+int main(){
+    int k;
+    scanf("%d", &k);
     Node *head = readList();
-    int median = findMedian(head);
-    printf("%d\n", median);
+    Node *corrected = removeSlide(head, k);
+    printList(corrected);
+    freeList(corrected);
     freeList(head);
     return 0;
 }
