@@ -70,6 +70,43 @@ void freeList(Node *head){
     }
 }
 
+int existsInList(Node *head, int value){
+    Node *current = head;
+    while (current!=NULL){
+        if (current->data == value){
+            return 1;
+            break;
+        }
+        current = current->next;
+    }
+    return 0;
+}
+
+Node *deleteElement(Node *head, int value){
+    Node *current = head;
+    while (current != NULL){
+        if (current->data == value){
+            if (current->prev == NULL){
+                current->next->prev = NULL;
+                return current->next;
+            }
+            else if (current->next == NULL){
+                current->prev->next = NULL;
+                return head;
+            }
+            else{
+                Node *temp = current->next;
+                current->prev->next = current->next;
+                current->next->prev = current->prev;
+                return head;
+            }
+        }
+        else{
+            current = current->next;
+        }
+    }
+}
+
 int main(){
     Node *playlist = readList();
     Node *currentSong = playlist;
@@ -92,7 +129,28 @@ int main(){
                 currentSong = currentSong->prev;
             }
         }
-        else break;
+        else if (i == 5) break;
+        else if (i == 6){
+            int song;
+            scanf("%d", &song);
+            if (!existsInList(playlist, song)){
+                Node *newSong = createNode(song);
+                Node *temp = currentSong->next;
+                currentSong->next = newSong;
+                newSong->next = temp;
+                temp->prev = newSong;
+                newSong->prev = currentSong;
+            }
+            else{
+                playlist = deleteElement(playlist, song);
+                Node *newSong = createNode(song);
+                Node *temp = currentSong->next;
+                currentSong->next = newSong;
+                newSong->next = temp;
+                temp->prev = newSong;
+                newSong->prev = currentSong;
+            }
+        }
     }
    freeList(playlist); 
 }
