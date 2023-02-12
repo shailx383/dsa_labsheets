@@ -69,6 +69,63 @@ void freeList(Node *head){
     }
 }
 
+Node *deleteElement(Node *head, int value){
+    Node *current = head;
+    while (current != NULL){
+        if (current->data == value){
+            if (current->prev == NULL){
+                current->next->prev = NULL;
+                return current->next;
+            }
+            else if (current->next == NULL){
+                current->prev->next = NULL;
+                return head;
+            }
+            else{
+                Node *temp = current->next;
+                current->prev->next = current->next;
+                current->next->prev = current->prev;
+                return head;
+            }
+        }
+        else{
+            current = current->next;
+        }
+    }
+}
+
+Node *rotateRight(Node *head){
+    int last;
+    Node *current = head;
+    while (current->next != NULL){
+        current = current->next;
+    }
+    last = current->data;
+    head = deleteElement(head, current->data);
+    Node *new = createNode(last);
+    new->next = head;
+    return new;
+}
+
 int main(){
-    
+    int n;
+    int k;
+    scanf("%d", &n);
+    scanf("%d", &k);
+    Node *head = NULL;
+    for (int i = 0; i < n; i++){
+        int x;
+        scanf("%d", &x);
+        if (head == NULL){
+            head = addToList(head, x);
+        }
+        else{
+            addToList(head, x);
+        }
+    }
+    for (int i = 0; i < k; i++){
+        head = rotateRight(head);
+    }
+    printList(head);
+    freeList(head);
 }
