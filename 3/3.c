@@ -69,16 +69,6 @@ void freeList(Node *head){
     }
 }
 
-int listSize(Node* head){
-    int size = 0;
-    Node *current = head;
-    while(current != NULL){
-        size++;
-        current = current->next;
-    }
-    return size;                
-}
-
 int f(Node *head, int sum)
 {
     Node *start = head;

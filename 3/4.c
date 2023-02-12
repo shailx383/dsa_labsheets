@@ -69,29 +69,14 @@ void freeList(Node *head){
     }
 }
 
-Node *deleteElement(Node *head, int value){
+int listSize(Node* head){
+    int size = 0;
     Node *current = head;
-    while (current != NULL){
-        if (current->data == value){
-            if (current->prev == NULL){
-                current->next->prev = NULL;
-                return current->next;
-            }
-            else if (current->next == NULL){
-                current->prev->next = NULL;
-                return head;
-            }
-            else{
-                Node *temp = current->next;
-                current->prev->next = current->next;
-                current->next->prev = current->prev;
-                return head;
-            }
-        }
-        else{
-            current = current->next;
-        }
+    while(current != NULL){
+        size++;
+        current = current->next;
     }
+    return size;                
 }
 
 int main(){
@@ -112,10 +97,18 @@ int main(){
     last = last->prev;
     B++;
     int strength = teamA + teamB;
-    while(1){
+    int result = A*10 + B;
+    int n = listSize(head);
+    for (int i = 0; i < 2 * n; i++){
         if (teamA == teamB){
-            printf("%d %d", A, B);
-            break;
+            if (teamA + teamB > strength){
+                strength = teamA + teamB;
+                result = A*10 + B;
+            }
+            else{
+                first = first->next;
+                last = last->prev;
+            }
         }
         else if (teamA > teamB){
             teamB += last->data;
@@ -127,5 +120,7 @@ int main(){
             first = first->next;
             A++;
         }
+        else if (last->data == first->data) break;
     }
+    printf("%d %d", result/10, result%10);
 }
