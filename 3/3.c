@@ -79,23 +79,31 @@ int listSize(Node* head){
     return size;                
 }
 
-int f(Node *head, int len, int sum)
+int f(Node *head, int sum)
 {
-    if (sum == 0) return 1;
-    if (len == 0 && sum != 0) return 0;
-    else
-    {
-        int a = f(head->next, len - 1, sum - head->data);
-        int b = f(head->next, len - 1, sum);
-        return a || b;
+    Node *start = head;
+    Node *current = head;
+    while(current->next != NULL){
+        current = current->next;
     }
+    Node *end = current;
+    while(end->data != start->data){
+        int current_sum = end->data + start->data;
+        if (sum > current_sum){
+            start = start->next;
+        }
+        else if (sum < current_sum){
+            end = end->prev;
+        }
+        else return 1;
+    }
+    return 0;
 }
 
 int main(){
     int k;
     scanf("%d", &k);
     Node *head = readList();
-    int n = listSize(head);
-    printf("%d", f(head, n, k));
+    printf("%d", f(head, k));
     freeList(head);
 }
