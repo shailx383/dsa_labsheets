@@ -95,16 +95,14 @@ Node *deleteElement(Node *head, int value){
 }
 
 Node *rotateRight(Node *head){
-    int last;
     Node *current = head;
-    while (current->next != NULL){
-        current = current->next;
-    }
-    last = current->data;
-    head = deleteElement(head, current->data);
-    Node *new = createNode(last);
-    new->next = head;
-    return new;
+    while (current->next != NULL) current = current->next;
+    Node *last = current;
+    Node *secondLast = current->prev;
+    secondLast->next = NULL;
+    last->next = head;
+    last->prev = NULL;
+    return last;
 }
 
 int main(){
