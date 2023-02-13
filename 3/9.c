@@ -20,8 +20,6 @@ int binSearch(int n, int r, int l, int target){
 int main(){
     long n;
     scanf("%ld", &n);
-    int arr[n-1];
-    for (int i = 0; i < n-1; i++) arr[i] = (2*(n-1)-i)*(i+1)/2;
     int half_comp = (n*(n-1))/4; 
     printf("%d", binSearch(n, n-2, 0, half_comp));
 }
