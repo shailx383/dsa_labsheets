@@ -11,6 +11,7 @@ typedef struct Node_t Node;
 
 Node *createNode(int value){
     Node *new = malloc(sizeof(Node));
+    assert(new != NULL);
     new->data = value;
     new->prev = NULL;
     new->next = NULL;
@@ -66,31 +67,6 @@ void freeList(Node *head){
         next = current->next;
         free(current);
         current = next;
-    }
-}
-
-Node *deleteElement(Node *head, int value){
-    Node *current = head;
-    while (current != NULL){
-        if (current->data == value){
-            if (current->prev == NULL){
-                current->next->prev = NULL;
-                return current->next;
-            }
-            else if (current->next == NULL){
-                current->prev->next = NULL;
-                return head;
-            }
-            else{
-                Node *temp = current->next;
-                current->prev->next = current->next;
-                current->next->prev = current->prev;
-                return head;
-            }
-        }
-        else{
-            current = current->next;
-        }
     }
 }
 

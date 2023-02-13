@@ -11,6 +11,7 @@ typedef struct Node_t Node;
 
 Node *createNode(int value){
     Node *new = malloc(sizeof(Node));
+    assert(new != NULL);
     new->data = value;
     new->prev = NULL;
     new->next = NULL;
