@@ -1,8 +1,6 @@
 #include <stdio.h>
 
-int nextIndex(int arr[], int N, int l,
-			int target)
-{
+int binSearch(int arr[], int N, int l, int target){
 	int result = -1;
 	int r = N - 1;
 	while (l <= r) {
@@ -17,12 +15,11 @@ int nextIndex(int arr[], int N, int l,
 	return result + 1;
 }
 
-int uniqueNum(int arr[], int n)
-{
+int uniqueNum(int arr[], int n){
 	int i = 0;
 	int count = 0;
-	while (i < n) {
-		i = nextIndex(arr, n, i, arr[i]);
+	while (i < n)    {
+		i = binSearch(arr, n, i, arr[i]);
 		count++;
 	}
 	return count;
@@ -32,8 +29,7 @@ int main(){
 	int n;
     scanf("%d", &n);
     int arr[n];
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++){
         scanf("%d", &arr[i]);
     }
 	printf("%d", uniqueNum(arr, n));
