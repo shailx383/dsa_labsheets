@@ -135,20 +135,31 @@ int main(){
             scanf("%d", &song);
             if (!existsInList(playlist, song)){
                 Node *newSong = createNode(song);
-                Node *temp = currentSong->next;
-                currentSong->next = newSong;
-                newSong->next = temp;
-                temp->prev = newSong;
-                newSong->prev = currentSong;
+                if (currentSong->next != NULL){
+                    Node *temp = currentSong->next;
+                    currentSong->next = newSong;
+                    newSong->next = temp;
+                    temp->prev = newSong;
+                    newSong->prev = currentSong;
+                }
+                else{
+                    addToList(playlist, song);
+                }
             }
             else{
                 playlist = deleteElement(playlist, song);
                 Node *newSong = createNode(song);
-                Node *temp = currentSong->next;
-                currentSong->next = newSong;
-                newSong->next = temp;
-                temp->prev = newSong;
-                newSong->prev = currentSong;
+                if (currentSong->next != NULL){
+                    Node *temp = currentSong->next;
+                    currentSong->next = newSong;
+                    newSong->next = temp;
+                    temp->prev = newSong;
+                    newSong->prev = currentSong;
+                }
+                else{
+                    deleteElement(playlist, song);
+                    addToList(playlist, song);
+                }
             }
         }
     }
