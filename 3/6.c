@@ -18,7 +18,7 @@ int binSearch(int arr[], int N, int l, int target){
 int uniqueNum(int arr[], int n){
 	int i = 0;
 	int count = 0;
-	while (i < n)    {
+	while (i < n){
 		i = binSearch(arr, n, i, arr[i]);
 		count++;
 	}
@@ -29,9 +29,7 @@ int main(){
 	int n;
     scanf("%d", &n);
     int arr[n];
-    for (int i = 0; i < n; i++){
-        scanf("%d", &arr[i]);
-    }
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
 	printf("%d", uniqueNum(arr, n));
 	return 0;
 }

@@ -11,12 +11,9 @@ int binSearch(int arr[], int r, int l, int target){
 
 int main(){
     int n, k;
-    scanf("%d", &n);
-    scanf("%d", &k);
+    scanf("%d %d", &n, &k);
     int arr[n];
-    for (int i = 0; i < n; i++){
-        scanf("%d", &arr[i]);
-    }
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
     int x = binSearch(arr, n-1, 0, k);
     printf("%d", arr[x]);
 }
