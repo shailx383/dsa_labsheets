@@ -2,9 +2,7 @@
 
 int num_planks(int plank_length, int arr[], int n){
     int sum = 0;
-    for (int i = 0; i < n; i++){
-        sum += arr[i]/plank_length;
-    }
+    for (int i = 0; i < n; i++) sum += arr[i]/plank_length;
     return sum;
 }
 
@@ -18,9 +16,7 @@ int maxInList(int arr[], int n){
 
 int arraySum(int arr[], int n){
     int sum = 0;
-    for (int i =0; i < n; i++){
-        sum += arr[i];
-    }
+    for (int i =0; i < n; i++) sum += arr[i];
     return sum;
 }
 
@@ -37,14 +33,10 @@ int binarySearch(int max, int l, int r, int target, int arr[], int n){
 }
 
 int main(){
-    int n;
-    scanf("%d", &n);
-    int k;
-    scanf("%d", &k);
+    int n, k;
+    scanf("%d %d", &n, &k);
     int arr[n];
-    for (int i = 0; i < n; i++){
-        scanf("%d", &arr[i]);
-    }
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
     int max = maxInList(arr, n);
     printf("%d", binarySearch(max, 0, max-1, k, arr, n));
 }
