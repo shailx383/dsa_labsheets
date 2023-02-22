@@ -57,12 +57,5 @@ int main(){
     mergeSort(arr, 0, n-1);
     //printf("sorted arr:\n");
     //printArr(arr, n);
-    int count = 1;
-    for (int i = n-1; i >=0; i--){
-        if (count == arr[i]){
-            printf("%d", count);
-            break;
-        }
-        else count++;
-    }
+    
 }

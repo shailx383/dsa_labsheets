@@ -45,31 +45,6 @@ void mergeSort(slot arr[], int l, int r){
     }
 }
 
-void result(slot arr[], int n){
-    int count = 0, i = 0;
-    slot final[n];
-    for (i = 0; i < n; i++){
-        printf("\ncurrent: %d %d\nnext: %d %d\n", arr[i].start, arr[i].end, arr[i+1].start, arr[i+1].end);
-        if (arr[i].end >= arr[i+1].start){
-            slot s;
-            s.start = arr[i].start;
-            s.end = arr[i+1].end;
-            final[count] = s;
-            count++;
-        }
-        else{
-            slot s;
-            s.start = arr[i].start;
-            s.end = arr[i].end;
-            final[count] = s;
-            count++;
-        }
-    }
-    printf("%d\n", count);
-    for (int i = 0; i < count; i++) printf("%d %d\n", final[i].start, final[i].end);
-    return;
-}
-
 int main(){
     int n;
     scanf("%d", &n);
@@ -81,7 +56,34 @@ int main(){
     }
     mergeSort(slots, 0, n-1);
     printf("\n");
-    result(slots, n);
+    slot new_slots[n];
+    int num = 0;
+    for (int i =0; i < n;i++){
+        if (num == 0){
+            new_slots[num] = slots[i];
+            num++;
+        }
+        else{
+            if (slots[i].start <= new_slots[num-1].end){
+                new_slots[num-1].end = slots[i].end;
+                if (slots[i].start <= new_slots[num-1].start){
+                    if (num >= 2){    
+                        if (slots[i].start > new_slots[num-2].end) new_slots[num-1].start = slots[i].start;
+                        else{
+                            new_slots[num-2].end = slots[i].end;
+                            num--;
+                        }
+                    }
+                }
+            }
+            else{
+                new_slots[num] = slots[i];
+                num++;
+            }
+        }
+    }
     
+    printf("%d\n", num);
+    for (int i = 0; i < num; i++) printf("%d %d\n", new_slots[i].start, new_slots[i].end);
     return 0;
 }
