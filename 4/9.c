@@ -40,7 +40,6 @@ int main(){
     int max_gcd = 0;
     for (int i = 0; i < n; i++){
         int *curr_arr = rem(arr, i, n);
-        //printarr(curr_arr, n-1);
         int curr_gcd = gcd_arr(curr_arr, n-1);
         if (curr_gcd > max_gcd) max_gcd = curr_gcd;
     }
