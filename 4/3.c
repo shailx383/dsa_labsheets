@@ -8,11 +8,10 @@ int trailing_zeros(int n){
 }
 
 int main(){
-    int n;
+    int n, result = 0, max = 0;
     scanf("%d", &n);
     int *arr = (int *)malloc(n * sizeof(int));
     for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
-    int max = 0;
     for (int i = 0; i < n; i++){
         int z = trailing_zeros(arr[i]);
         if (z > max) max = z;
@@ -20,7 +19,6 @@ int main(){
     int *freq = (int*)malloc(sizeof(int)*(max+1));
     for (int i = 0; i <= max; i++) freq[i] = 0;
     for (int i = 0; i < n; i++) freq[trailing_zeros(arr[i])]++;
-    int result = 0;
     for (int i = 0; i <= max; i++) result += (freq[i] *(freq[i] - 1))/2;
     printf("%d", result);
 }

@@ -14,7 +14,7 @@ void merge(slot arr[], int l, int m, int r){
     for (int j = 0; j < n2; j++) b[j] = arr[m + j + 1];
     int i = 0, j = 0, k = l;
     while (i < n1 && j < n2){
-        if (a[i].end < b[j].end){
+        if (a[i].start < b[j].start){
             arr[k] = a[i];
             i++;
         }
@@ -45,6 +45,7 @@ void mergeSort(slot arr[], int l, int r){
     }
 }
 
+
 int main(){
     int n;
     scanf("%d", &n);
@@ -64,16 +65,10 @@ int main(){
             num++;
         }
         else{
-            if (slots[i].start <= new_slots[num-1].end){
-                new_slots[num-1].end = slots[i].end;
-                if (slots[i].start <= new_slots[num-1].start){
-                    if (num >= 2){    
-                        if (slots[i].start > new_slots[num-2].end) new_slots[num-1].start = slots[i].start;
-                        else{
-                            new_slots[num-2].end = slots[i].end;
-                            num--;
-                        }
-                    }
+            if (slots[i].start >= new_slots[num-1].start && slots[i].start <= new_slots[num - 1].end){
+                
+                if (slots[i].end > new_slots[num-1].end){
+                    new_slots[num-1].end = slots[i].end;
                 }
             }
             else{
@@ -82,7 +77,6 @@ int main(){
             }
         }
     }
-    
     printf("%d\n", num);
     for (int i = 0; i < num; i++) printf("%d %d\n", new_slots[i].start, new_slots[i].end);
     return 0;

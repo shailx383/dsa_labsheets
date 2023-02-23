@@ -31,13 +31,13 @@ int *copy(int arr[], int n){
     return res;
 }
 
-int *countsort(int arr[], int n, int place){
+int *countsort(int *arr, int n, int place){
     int last = (max(arr, n, place)/place)%10;
     int* sorted = (int*)malloc(sizeof(int)*n);
     int* freq = (int*)malloc((last+1)*sizeof(int));
     for (int i = 0; i < last+1; i++) freq[i] = 0;
     for (int i = 0; i < n; i++) freq[(arr[i]/place)%10]++;
-    for (int i = 2; i <= last; i++) freq[i] = freq[i] + freq[i-1];
+    for (int i = 1; i <= last; i++) freq[i] = freq[i] + freq[i-1];
     for (int i = n-1; i >=0; i--){
         int curr_digit = ((arr[i]/place)%10);
         int index = freq[curr_digit];
@@ -50,16 +50,17 @@ int *countsort(int arr[], int n, int place){
 int main(){
     int n;
     scanf("%d", &n);
-    int arr[n];
+    int *arr = (int *)malloc(sizeof(int)*n);
     for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+    int *new = copy(arr, n);
     int max_place = 1;
     int max_elem = maxOfArray(arr, n);
     for (int i = max_elem/10; i >0; i/=10){
         max_place*=10;
     }
-    for(int place = 1; place <= max_place; place*=10){
-        int* new = countsort(arr, n, place);
+    for (int i = 1; i <= max_place ; i*=10){
+        new = countsort(new, n, i);
         printarr(new, n);
-        int* arr = copy(new, n);
     }
+    return 0;
 }
