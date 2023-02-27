@@ -27,12 +27,6 @@ int* result(int* primes, int n){
     for (int i = 1; i <= n+1; i++) primes[i] = primes[i] + primes[i-1];
     return primes;
 }
-
-void printarr(int *arr, int n){
-    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
-    printf("\n");
-}
-
 int main(){
     int n,q;
     scanf("%lld %lld", &n, &q);
