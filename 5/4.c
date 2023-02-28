@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int avg(int arr[], int k){
+// int avg(int arr[], int k){
 
-}
+// }
 
 int main(){
     int n, k, t;
