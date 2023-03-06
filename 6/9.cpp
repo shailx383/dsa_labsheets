@@ -32,19 +32,15 @@ string simplified_path(string path){
     }
     if (stk.empty()) return "/";
     stack <string> new_stk;
-
     while (!stk.empty()){
         new_stk.push(stk.top());
         stk.pop();
     }
-
     while (!new_stk.empty()){
         simp += '/';
         simp += new_stk.top();
-        
         new_stk.pop();
     }
-
     return simp;
 }
 
