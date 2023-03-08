@@ -2,16 +2,30 @@
 #include <stack>
 using namespace std;
 
-void stock_spread(int arr[], int n, int result[]){
-    int *spread = new int[n];
-    stack <int> s;
-    s.push(0);
-    result[0] = 1;
-    for (int i = 1; i < n; i++){
-        while (!s.empty() && arr[s.top()] <= arr[i]) s.pop();
-        result[i] = (s.empty()) ? (i+1) : (i - s.top());
-        s.push(i);
+struct indexed_list{
+    int data;
+    int index;
+};
+typedef struct indexed_list list;
+
+int *num_steps_to_nge(int arr[], int n){
+    int *ans = new int[n];
+    stack <list> s;
+    for (int i = 2*n - 1; i >= 0; i--){
+        while (!s.empty() && arr[i%n] >= s.top().data ) s.pop();
+        if (i < n){
+            if (!s.empty()){
+                int diff = s.top().index - (i%n);
+                ans[i] = diff > 0 ? diff : diff + n;
+            }
+            else ans[i] = -1;
+        }
+        list elt;
+        elt.data = arr[i%n];
+        elt.index = i%n;
+        s.push(elt);
     }
+    return ans;
 }
 
 int main(){
@@ -19,8 +33,7 @@ int main(){
     cin >> n;
     int arr[n];
     for (int i =0; i < n; i++) cin >> arr[i];
-    int result[n];
-    stock_spread(arr, n, result);
-    for (int i =0; i < n; i++) cout << result[i] << " ";
+    int *result = num_steps_to_nge(arr, n);
+    for (int i =0; i < n ; i++) cout << result[i] << " ";
     return 0;
 }

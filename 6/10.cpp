@@ -9,7 +9,8 @@ int num_ops(string s){
     for (int i =0; i < s.length(); i++){
         if (s[i]=='(') stk.push(1);
         else if (!stk.empty() && s[i] == ')') stk.pop();
-        else ans++;
+        else if (stk.empty() && s[i] == ')') ans++;
+        else ans += 2;
     }
     ans += stk.size();
     return ans;

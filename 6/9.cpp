@@ -12,10 +12,14 @@ string simplified_path(string path){
         if (path[i] == '/'){
             i++;
         }
-        if (path[i] == '.' && path[i+1] != '.'){
+        else if (path[i] == '.' && path[i+1] != '.'){
             i += 2;
         }
         else if (path[i] == '.' && path[i+1]== '.'){
+            if (stk.empty()){
+                cout << "Wrong" << endl;
+                return "";
+            }
             stk.pop();
             i += 3;
         }
