@@ -1,13 +1,14 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #define int long long
 
-typedef struct Node_t
+struct Node_t
 {
     int data;
-    struct Node_t *prev;
     struct Node_t *next;
-} Node;
+    struct Node_t *prev;
+};
+typedef struct Node_t Node;
 
 int main()
 {
@@ -15,9 +16,7 @@ int main()
     scanf("%lld", &n);
     int *arr = malloc(n * sizeof(int));
     for (int i = 0; i < n; i++)
-    {
         scanf("%lld", &arr[i]);
-    }
     Node *head = malloc(sizeof(Node));
     head->data = arr[0];
     Node *temp = head;

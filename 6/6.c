@@ -21,6 +21,7 @@ int main()
     Node *head = malloc(sizeof(Node));
     head->data = arr[0];
     Node *temp = head;
+    head->next = NULL;
     head->prev = NULL;
     for (int i = 1; i < n; i++)
     {
@@ -28,6 +29,7 @@ int main()
         {
             Node *a = malloc(sizeof(Node));
             a->data = arr[i];
+            a->next = NULL;
             temp->next = a;
             a->prev = temp;
             temp = a;
@@ -38,6 +40,7 @@ int main()
             p->data = arr[i];
             p->next = head;
             head->prev = p;
+            p->prev= NULL;
             head = p;
         }
     }

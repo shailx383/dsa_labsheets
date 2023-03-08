@@ -7,7 +7,6 @@ string simplified_path(string path){
     int i = 0;
     stack <string> stk;
     string simp = "";
-    int j = 1;
     while (i < path.length()){
         string curr_dir = "";
         if (path[i] == '/'){
