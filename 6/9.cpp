@@ -9,12 +9,8 @@ string simplified_path(string path){
     string simp = "";
     while (i < path.length()){
         string curr_dir = "";
-        if (path[i] == '/'){
-            i++;
-        }
-        else if (path[i] == '.' && path[i+1] != '.'){
-            i += 2;
-        }
+        if (path[i] == '/') i++;
+        else if (path[i] == '.' && path[i+1] != '.') i += 2;
         else if (path[i] == '.' && path[i+1]== '.'){
             if (stk.empty()){
                 cout << "Wrong" << endl;
@@ -50,7 +46,6 @@ string simplified_path(string path){
 int main(){
     string s;
     cin >> s;
-    string result = simplified_path(s);
-    cout << result;
+    cout << simplified_path(s);
     return 0;
 }

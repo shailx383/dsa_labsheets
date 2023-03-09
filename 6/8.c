@@ -26,10 +26,8 @@ int isQueueFull(Queue *q)
     return q->size == MAX_QUEUE_SIZE;
 }
 
-void enqueue(Queue *q, int value)
-{
-    if (isQueueFull(q))
-    {
+void enqueue(Queue *q, int value){
+    if (isQueueFull(q)){
         printf("Error: queue is full\n");
         exit(0);
     }
@@ -49,16 +47,10 @@ int dequeue(Queue *q)
     q->size--;
     return value;
 }
-int josephus(Queue *q, int n, int k)
-{
-    for (int i = 1; i <= n; i++)
-    {
-        enqueue(q, i);
-    }
-    while (q->size > 1)
-    {
-        for (int i = 0; i < k - 1; i++)
-        {
+int josephus(Queue *q, int n, int k){
+    for (int i = 1; i <= n; i++) enqueue(q, i);
+    while (q->size > 1){
+        for (int i = 0; i < k - 1; i++){
             int value = dequeue(q);
             enqueue(q, value);
         }
@@ -66,8 +58,7 @@ int josephus(Queue *q, int n, int k)
     }
     return dequeue(q);
 }
-int main()
-{
+int main(){
     int n, k;
     scanf("%lld %lld", &n, &k);
     Queue q;

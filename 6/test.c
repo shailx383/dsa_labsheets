@@ -1,59 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_SIZE 100000
 #define int long long
 
-struct Queue{
-    int data[MAX_SIZE];
-    int front, rear, size;
-};
-typedef struct Queue Q;
-
-void initQueue(Q *q){
-    q->front = 0;
-    q->rear = -1;
-    q->size = 0;
+void enqueue(int x, int *freq, int *q, int *rear){
+    freq[x]++;
+    q[*rear] = x;
+    (*rear)++;
 }
 
-void enqueue(Q *q, int val){
-    if (q->size == MAX_SIZE){
-        printf("Error: Queue is full\n");
-        exit(EXIT_FAILURE);
+void dequeue(int *u, int *freq, int *q, int *front, int *rear){
+    while (freq[q[*front]] > 1){
+        freq[q[*front]]--;
+        (*front)++;
     }
-    q->rear = (q->rear + 1) % MAX_SIZE;
-    q->data[q->rear] = val;
-    q->size++;
+    *u = (*rear > *front) ? q[*front] : -1;
 }
 
-int dequeue(Q *q){
-    if (q->size == 0){
-        printf("Error: queue is empty\n");
-        exit(EXIT_FAILURE);
-    }
-    int value = q->data[q->front];
-    q->front= (q->front + 1) % MAX_SIZE;
-    q->size--;
-    return value;
-}
+int main(){
+    int n = 0, front = 0, rear = 0, u =0;
+    scanf("%d", &n);
+    int *freq = calloc((n+1), sizeof(int));
+    int *q = calloc(n, sizeof(int));
 
-int josephus(Q *q, int n, int k){
-    for (int i = 1; i <=n; i++) enqueue(q, i);
-    while (q->size > 1){
-        for (int i =0; i < k -1; i++){
-            int val = dequeue(q);
-            enqueue(q, val);
+    for (int i = 0; i < n; i++){
+        int x;
+        scanf("%d", &x);
+        if (freq[x] == 0){
+            enqueue(x, freq, q, &rear);
+            if (u == -1) u = x;
         }
-        dequeue(q);
+        else{
+            freq[x]++;
+        }
+        dequeue(&u, freq, q, &front, &rear);
+        printf("%d ", u);
     }
-    return dequeue(q);
-}
-
-int main()
-{
-    int n, k;
-    scanf("%lld %lld", &n, &k);
-    Q q;
-    initQueue(&q);
-    printf("%lld", josephus(&q, n, k));
     return 0;
 }
