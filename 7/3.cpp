@@ -11,9 +11,7 @@ struct TreeNode {
 };
 
 TreeNode *build_tree(int arr[], int n, int index){
-    if (index > n || arr[index-1] == -1){
-        return nullptr;
-    }
+    if (index > n || arr[index-1] == -1) return nullptr;
     else{
         TreeNode *node = new TreeNode(arr[index - 1]);
         node->left = build_tree(arr, n, index * 2);
