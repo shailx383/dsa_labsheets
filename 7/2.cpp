@@ -8,9 +8,9 @@ struct Node{
 };
 typedef struct Node Node;
 
-Node* build_tree(int infix[], int prefix[], int n){
+// Node* build_tree(int infix[], int prefix[], int n){
 
-}
+// }
 
 int main(){
     int n;
