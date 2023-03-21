@@ -20,15 +20,8 @@ TreeNode *build_tree(int arr[], int n, int index){
     }
 }
 
-// int num_freedom_nodes(TreeNode *tree, int sum){
-//     static int num = 0;
-//     if (tree == nullptr) return 0;
-//     else if (tree->left == nullptr)
-//     else{
-//         int sum = 0;
-//         sum += num_freedom_nodes(tree->left, sum);
-//         sum += num_freedom_nodes(tree->right, sum);
-//     }
+// int freedom_nodes(TreeNode* tree, int sum, int count){
+
 // }
 
 int main(){
