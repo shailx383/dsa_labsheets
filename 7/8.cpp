@@ -20,9 +20,21 @@ TreeNode *build_tree(int arr[], int n, int index){
     }
 }
 
-TreeNode *delete_from_bst(TreeNode *bst, int elem){
-    int min;
-    int max;
+TreeNode *beautiful_bst(TreeNode *root, int l, int r)
+{
+    if (root == nullptr) return nullptr;
+    if (root->val < l) return beautiful_bst(root->right, l, r);
+    if (root->val > r) return beautiful_bst(root->left, l, r);
+    root->left = beautiful_bst(root->left, l, r);
+    root->right = beautiful_bst(root->right, l, r);
+    return root;
+}
+
+void print_post_order(TreeNode *tree){
+    if (tree == nullptr) return;
+    print_post_order(tree->left);
+    print_post_order(tree->right);
+    cout << tree->val << " ";
 }
 
 int main(){
@@ -31,4 +43,8 @@ int main(){
     int arr[n];
     for (int i =0; i < n ; i++) cin >> arr[i];
     TreeNode *bst = build_tree(arr, n, 1);
+    TreeNode *beautified_bst = beautiful_bst(bst, l, r);
+    print_post_order(beautified_bst);
+    cout << endl;
+    return 0;
 }
