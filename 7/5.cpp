@@ -23,7 +23,7 @@ int kth_largest_element(int tree[], int n, int k){
             parsed[x++] = tree[smallest_index - 1];
             smallest_index *= 2;
             i++;
-        }
+        }                
     }
     return smallest_index;
 }
