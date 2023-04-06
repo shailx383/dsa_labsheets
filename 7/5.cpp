@@ -1,31 +1,41 @@
 #include <iostream>
+#include <stack>
 using namespace std;
 
-int is_in_list(int arr[], int n, int elem){
-    for (int i = 0; i < n; i++){
-        if (arr[i] == elem) return 1;
-    }
-    return 0;
+struct TreeNode{
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+    TreeNode(): val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x): val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *l, TreeNode *r): val(x), left(l), right(r) {}
+};
+
+TreeNode *build_binary_tree(int arr[], int n, int index){
+        if (index > n || arr[index - 1] == -1) return nullptr;
+        else{
+            TreeNode *node = new TreeNode(arr[index - 1], build_binary_tree(arr, n, 2 * index), build_binary_tree(arr, n, 2 * index + 1));
+            return node;
+        }
 }
 
-int kth_largest_element(int tree[], int n, int k){
-    int smallest_index = 1;
-    while (smallest_index <= n && tree[smallest_index - 1] != -1){
-        smallest_index = smallest_index * 2 + 1;
+int kth_largest(TreeNode *tree, int k){
+    int count = 0, elem = 0;
+    stack <TreeNode*> stk;
+    TreeNode *curr = tree;
+    while (curr != nullptr || !stk.empty()){
+        while (curr != nullptr){
+            stk.push(curr);
+            curr = curr->right;
+        }
+        curr = stk.top();
+        stk.pop();
+        elem = curr->val;
+        count++;
+        if (count == k) return elem;
+        curr = curr->left;
     }
-    smallest_index = smallest_index/2;
-    return smallest_index;
-    int i = 0;
-    int parsed[n];
-    int x = 0;
-    while (i < k){
-        if (tree[smallest_index * 2 - 1] != -1 && tree[smallest_index * 2] == -1){
-            parsed[x++] = tree[smallest_index - 1];
-            smallest_index *= 2;
-            i++;
-        }                
-    }
-    return smallest_index;
+    return -1;
 }
 
 int main(){
@@ -34,6 +44,7 @@ int main(){
     int arr[n];
     for (int i =0; i < n; i++) cin >> arr[i];
     cin >> k;
-    cout << kth_largest_element(arr, n, k) << endl;
+    TreeNode *tree = build_binary_tree(arr, n, 1);
+    cout << kth_largest(tree, k) << endl;
     return 0;
 }
