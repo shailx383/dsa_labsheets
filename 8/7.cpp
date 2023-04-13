@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     int n, x, y;
     cin >> n;
-    pair <int, int> coordinates[n];
+    pair<int, int> coordinates[n];
     for (int i = 0; i < n; i++){
         cin >> x >> y;
         coordinates[i] = {x, y};
@@ -23,9 +23,8 @@ int main(){
             mp[{base, height}]++;
         }
         int temp = n - (i + 1);
-        answer += temp * (temp-1)/2;
-        for (auto m : mp) answer -= (m.second )* (m.second - 1)/2;
+        answer += temp * (temp - 1) / 2;
+        for (auto m : mp) answer -= (m.second) * (m.second - 1) / 2; 
     }
-    cout << answer << endl;
-    return 0;
+    cout << answer;
 }
