@@ -4,7 +4,6 @@
 #include <vector>
 using namespace std;
 
-
 typedef unordered_map<int, unordered_map<int, int>> sparse_matrix;
 
 int main(){

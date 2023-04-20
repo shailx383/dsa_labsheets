@@ -2,10 +2,7 @@
 #include <vector>
 using namespace std;
 
-struct query{
-    int start, end;
-};
-typedef struct query query;
+typedef pair<int, int> query;
 
 int main(){
     int n, q;
@@ -15,7 +12,7 @@ int main(){
     query queries[q];
     for (int i =0; i < q; i++){
         query qu;
-        cin >> qu.start >> qu.end;
+        cin >> qu.first >> qu.second;
         queries[i] = qu;
     }
     vector<int> nextCandle(n, n), prevCandle(n, -1), prefixSum(n, 0);
@@ -26,10 +23,10 @@ int main(){
     }
     vector <int> ans;
     for (int i =0; i < q; i++){
-        int start = nextCandle[queries[i].start] > queries[i].end ? 0 : nextCandle[queries[i].start];
-        int end = prevCandle[queries[i].end] < queries[i].start ? 0 : prevCandle[queries[i].end];
-        ans.push_back(prefixSum[end] - prefixSum[start]);
+        int first = nextCandle[queries[i].first] > queries[i].second ? 0 : nextCandle[queries[i].first];
+        int second = prevCandle[queries[i].second] < queries[i].first ? 0 : prevCandle[queries[i].second];
+        ans.push_back(prefixSum[second] - prefixSum[first]);
     }
-    for(int i=0; i < ans. size(); i++) cout << ans.at(i) << endl;
+    for(int i=0; i < ans.size(); i++) cout << ans.at(i) << endl;
     return 0;
 }

@@ -11,7 +11,6 @@ struct compare{
 
 typedef priority_queue<int, vector<int>, compare> min_heap;
 
-
 int main(){
     int n;
     cin >> n;

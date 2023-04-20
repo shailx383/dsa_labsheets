@@ -1,31 +1,50 @@
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
+bool isValid(int arr[], int n, int mid,int k){
+	for (int i = 0; i < mid; i++){
+
+		if (abs(arr[n - mid + i]- arr[i])< k) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+int countPairs(int arr[], int n, int k){
+	int ans = 0;
+
+	int left = 0;
+    int right = n / 2 + 1;
+
+	while (left < right){
+
+		int mid = (left + right) / 2;
+
+		if (isValid(arr, n, mid, k)){
+			ans = mid;
+			left = mid + 1;
+		}
+		else
+			right = mid - 1;
+	}
+	return ans;
+}
+
 int main(){
-    int n, k;
+
+    int n,k;
     cin >> n >> k;
     int arr[n];
-    for (int i =0; i < n; i++) cin >> arr[i];
-    sort(arr, arr + n);
-    int median  = arr[n/2];
-    int i = n - 1;
-    int ops = 0;
-    for (int i = 0;i < n; i++) cout << arr[i] << " ";
-    while(i >= n/2){
-        int j = n/2;
-        while (j >= 0){
-            cout << "current i " << i; 
-            cout << "current j " << j; 
-            int j = 0;
-            if (arr[i] - arr[n/2 - j] >= k){
-                ops++;
-                j = -1;
-            } 
-            j++;
-        }
-        
-    } 
-    cout << ops << endl;  
-    return 0;
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+	sort(arr, arr + n);
+
+	cout << countPairs(arr, n, k);
+
+	return 0;
 }

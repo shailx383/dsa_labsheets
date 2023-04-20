@@ -1,19 +1,22 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <queue>
 using namespace std;
 
 typedef pair<int, int> pii;
+
+
 struct Compare{
-    bool operator()(pii a, pii b)
-    {
+    bool operator()(pii a, pii b){
         return a.first > b.first;
     }
 };
 
 int n_platforms(vector<pii> trains){
-
     int n = trains.size();
     priority_queue<pii, vector<pii>, Compare> pq;
-    for (int i = 0; i < n; i++){
+    for (int i =0;i < n; i++) pq.push((trains.at(i)));
+    for (int i =0; i < n; i++){
         trains.at(i) = pq.top();
         pq.pop();
     }
@@ -26,6 +29,7 @@ int n_platforms(vector<pii> trains){
         p.push(trains.at(i).second);
     }
     return count;
+
 }
 
 int main(){
