@@ -1,7 +1,5 @@
-#include <algorithm>
 #include <iostream>
 #include <vector>
-
 using namespace std;
 
 int merge(vector<int> &A, int left, int mid, int right){
