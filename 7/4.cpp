@@ -10,15 +10,7 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-TreeNode *build_tree(int arr[], int n, int index){
-    if (index > n || arr[index-1] == -1) return nullptr;
-    else{
-        TreeNode *node = new TreeNode(arr[index - 1]);
-        node->left = build_tree(arr, n, index * 2);
-        node->right = build_tree(arr, n, index * 2 + 1);
-        return node;
-    }
-}
+-
 
 TreeNode *bst_to_gst(TreeNode *tree){
     

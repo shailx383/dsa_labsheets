@@ -13,7 +13,10 @@ int *num_steps_to_nge(int a[], int n)
     stack<list> s;
     int* ans = new int[n];
     for (int i = 2 * n - 1; i >= 0; i--) {
-        while (!s.empty() && a[i % n] >= (s.top()).data) s.pop();
+        while (!s.empty() && a[i % n] >= (s.top()).data){
+            cout << "popping " << s.top().data << " " << s.top().index << endl; 
+            s.pop();
+        } 
         if (i < n) {
             if (!s.empty()){
                 int d = s.top().index - (i%n);
@@ -22,6 +25,7 @@ int *num_steps_to_nge(int a[], int n)
             else ans[i] = -1;
         }
         list elt;
+        cout << "pushing " << a[i%n] << " " << i%n << endl;
         elt.data = a[i%n];
         elt.index = i%n;
         s.push(elt);

@@ -7,9 +7,13 @@ int largest_rectangular_area(int arr[], int n){
     int top, area_top, max = 0;
     int i =0;
     while (i < n){
-        if (s.empty() || arr[s.top()] <= arr[i]) s.push(i++);
+        if (s.empty() || arr[s.top()] <= arr[i]){
+            cout << "pushing index" << i << endl;
+            s.push(i++);
+        }
         else{
             top = s.top();
+            cout << "popping index " << top << endl;
             s.pop();
             area_top = arr[top] * (s.empty() ? i : i - s.top() - 1);
             if (max < area_top) max = area_top;
