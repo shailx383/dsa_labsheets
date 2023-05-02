@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 int len_longest_common_subarray(int n, int m, int a[], int b[]){
     int dp[n+1][m+1];
     int maximum = 0;
