@@ -10,12 +10,11 @@ int max_score(vector<int>&A,int total,int i,int j){
     return total-min(max_score(A,total-A[i],i+1,j),max_score(A,total-A[j],i,j-1));
 }
 
-bool winner(vector<int>& nums) {
+bool winner(vector<int>& nums){
         int total=0; 
-        for(auto x:nums)
-            total+=x;
+        for(auto x:nums) total+=x;
         return check_win(max_score(nums,total,0,nums.size()-1),total);
-    }
+}
 
 int main(){
     int n;
