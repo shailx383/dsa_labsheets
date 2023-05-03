@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long maxWeight(vector<long>& w, vector<long>& val, long n, long c, int val_sum, long max_w){
+long maxWeight(vector<long>& weights, vector<long>& values, long n, long c, int val_sum, long max_w){
 	long dp[val_sum + 1][n + 1];
 	for (long i = 0; i <= val_sum; i++){
 		for (long j = 0; j <= n; j++) dp[i][j] = max_w;
@@ -9,7 +9,7 @@ long maxWeight(vector<long>& w, vector<long>& val, long n, long c, int val_sum, 
 	for (int i = 0; i <= n; i++) dp[0][i] = 0;
 	for (int i = 1; i <= val_sum; i++){
 		for (int j = 1; j <= n; j++)
-			dp[i][j] = min(dp[i][j - 1], (i >= val[j - 1]) ? w[j - 1] + dp[i - val[j - 1]][j - 1] : max_w);
+			dp[i][j] = min(dp[i][j - 1], (i >= values[j - 1]) ? weights[j - 1] + dp[i - values[j - 1]][j - 1] : max_w);
     }
 	for (long i = val_sum; i >= 0; i--){
         if (dp[i][n] <= c)
